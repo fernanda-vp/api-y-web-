@@ -1,0 +1,13 @@
+model Zone {
+  id        Int      @id @default(autoincrement())
+  companyId Int
+  company   Company  @relation(fields: [companyId], references: [id])
+  name      String
+  address   String
+  statusId  Int
+  status    Status   @relation(fields: [statusId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  positions Position[]
+}

@@ -1,0 +1,24 @@
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  name      String
+  lastName  String
+  photoUrl  String?
+  statusId  Int
+  status    Status   @relation(fields: [statusId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  credential      UserCredential?
+  employee        Employee?
+  roleAssignments RoleAssignment[]
+}
+
+model UserCredential {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @unique
+  user         User     @relation(fields: [userId], references: [id])
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

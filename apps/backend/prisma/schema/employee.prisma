@@ -1,0 +1,15 @@
+model Employee {
+  id              Int       @id @default(autoincrement())
+  userId          Int       @unique
+  user            User      @relation(fields: [userId], references: [id])
+  code            String    @unique
+  phone           String?
+  bio             String?
+  terminationDate DateTime?
+  statusId        Int
+  status          Status    @relation(fields: [statusId], references: [id])
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  positions Position[]
+}

@@ -1,0 +1,30 @@
+model StatusGroup {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  statuses Status[]
+}
+
+model Status {
+  id          Int         @id @default(autoincrement())
+  groupId     Int
+  group       StatusGroup @relation(fields: [groupId], references: [id])
+  code        String
+  description String
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  companies   Company[]
+  zones       Zone[]
+  departments Department[]
+  jobTitles   JobTitle[]
+  users       User[]
+  employees   Employee[]
+  positions   Position[]
+
+  @@unique([groupId, code])
+}

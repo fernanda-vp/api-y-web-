@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: var(--color-neutral-900);
+
+  --color-primary-900: #173654;
+  --color-primary-700: #204f82;
+  --color-primary: #3072b0;
+  --color-primary-400: #5c93c6;
+  --color-primary-200: #a9c6e1;
+  --color-primary-50: #eaf2f9;
+
+  --color-accent-900: #5c6e07;
+  --color-accent-700: #7c930a;
+  --color-accent: #a0bc0c;
+  --color-accent-400: #bbd24f;
+  --color-accent-200: #d9e8a0;
+  --color-accent-50: #f3f8e4;
+
+  --color-neutral-900: #3a3a38;
+  --color-neutral-700: #5b5a57;
+  --color-neutral: #787775;
+  --color-neutral-400: #a2a19e;
+  --color-neutral-200: #d6d5d2;
+  --color-neutral-100: #ededeb;
+
+  --color-success: #3e8e3e;
+  --color-warning: #d69a1e;
+  --color-error: #c24a3e;
+  --color-info: var(--color-primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-primary-900: var(--color-primary-900);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary: var(--color-primary);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-50: var(--color-primary-50);
+
+  --color-accent-900: var(--color-accent-900);
+  --color-accent-700: var(--color-accent-700);
+  --color-accent: var(--color-accent);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-200: var(--color-accent-200);
+  --color-accent-50: var(--color-accent-50);
+
+  --color-neutral-900: var(--color-neutral-900);
+  --color-neutral-700: var(--color-neutral-700);
+  --color-neutral: var(--color-neutral);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-100: var(--color-neutral-100);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --color-info: var(--color-info);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Animaciones de entrada/salida para popovers y modales de Radix UI (dropdowns, dialogs). */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}

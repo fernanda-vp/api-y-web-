@@ -1,0 +1,18 @@
+enum ScopeType {
+  GLOBAL
+  COMPANY
+  ZONE
+  DEPARTMENT
+}
+
+model RoleAssignment {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  roleId    Int
+  role      Role      @relation(fields: [roleId], references: [id])
+  scopeType ScopeType
+  scopeId   Int?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}

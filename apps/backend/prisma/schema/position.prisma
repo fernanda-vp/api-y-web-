@@ -1,0 +1,23 @@
+model Position {
+  id                          Int        @id @default(autoincrement())
+  employeeId                  Int
+  employee                    Employee   @relation(fields: [employeeId], references: [id])
+  jobTitleId                  Int
+  jobTitle                    JobTitle   @relation(fields: [jobTitleId], references: [id])
+  departmentId                Int
+  department                  Department @relation(fields: [departmentId], references: [id])
+  zoneId                      Int
+  zone                        Zone       @relation(fields: [zoneId], references: [id])
+  managerPositionId           Int?
+  managerPosition             Position?  @relation("DirectManager", fields: [managerPositionId], references: [id])
+  directReports               Position[] @relation("DirectManager")
+  functionalManagerPositionId Int?
+  functionalManagerPosition   Position?  @relation("FunctionalManager", fields: [functionalManagerPositionId], references: [id])
+  functionalReports           Position[] @relation("FunctionalManager")
+  startDate                   DateTime
+  endDate                     DateTime?
+  statusId                    Int
+  status                      Status     @relation(fields: [statusId], references: [id])
+  createdAt                   DateTime   @default(now())
+  updatedAt                   DateTime   @updatedAt
+}
