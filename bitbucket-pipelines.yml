@@ -1,0 +1,28 @@
+image: node:20.19.5
+
+definitions:
+  caches:
+    pnpm: $BITBUCKET_CLONE_DIR/.pnpm-store
+  steps:
+    - step: &lint-build-test
+        name: Lint, build & test
+        caches:
+          - pnpm
+        script:
+          - corepack enable
+          - corepack prepare pnpm@9.15.0 --activate
+          - pnpm config set store-dir "$BITBUCKET_CLONE_DIR/.pnpm-store"
+          - pnpm install --frozen-lockfile
+          - pnpm --filter intranet-api exec prisma generate
+          - pnpm --filter @intranet/api-client exec tsc --noEmit
+          - pnpm run lint
+          - pnpm run build
+          - pnpm run test
+
+pipelines:
+  pull-requests:
+    "**":
+      - step: *lint-build-test
+  branches:
+    main:
+      - step: *lint-build-test
