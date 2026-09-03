@@ -1,0 +1,7 @@
+-- CreateEnum
+CREATE TYPE "ContractType" AS ENUM ('INDEFINITE', 'FIXED_TERM', 'PROJECT', 'INTERN');
+
+-- AlterTable
+ALTER TABLE "Employee" ADD COLUMN     "contractEndDate" TIMESTAMP(3),
+ADD COLUMN     "contractType" "ContractType" NOT NULL DEFAULT 'INDEFINITE',
+ADD COLUMN     "hireDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
