@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { PermissionsService } from '../../roles/application/permissions.service';
 import { UsersService } from '../../users/application/users.service';
 import { PasswordPolicy } from '../../users/domain/password.policy';
 
@@ -8,6 +9,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly permissionsService: PermissionsService,
   ) {}
 
   async login(username: string, password: string) {
@@ -40,7 +42,10 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
+    const permissions =
+      await this.permissionsService.getEffectivePermissions(userId);
+
     const { id, username, name, lastName, photoUrl, employee } = user;
-    return { id, username, name, lastName, photoUrl, employee };
+    return { id, username, name, lastName, photoUrl, employee, permissions };
   }
 }

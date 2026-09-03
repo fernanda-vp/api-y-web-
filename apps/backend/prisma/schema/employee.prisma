@@ -1,15 +1,25 @@
+enum ContractType {
+  INDEFINITE
+  FIXED_TERM
+  PROJECT
+  INTERN
+}
+
 model Employee {
-  id              Int       @id @default(autoincrement())
-  userId          Int       @unique
-  user            User      @relation(fields: [userId], references: [id])
-  code            String    @unique
+  id              Int          @id @default(autoincrement())
+  userId          Int          @unique
+  user            User         @relation(fields: [userId], references: [id])
+  code            String       @unique
   phone           String?
   bio             String?
+  hireDate        DateTime     @default(now())
+  contractType    ContractType @default(INDEFINITE)
+  contractEndDate DateTime?
   terminationDate DateTime?
   statusId        Int
-  status          Status    @relation(fields: [statusId], references: [id])
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  status          Status       @relation(fields: [statusId], references: [id])
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
   positions Position[]
 }

@@ -1,20 +1,13 @@
 "use server";
 
 import { createCompanySchema, updateCompanySchema } from "@intranet/api-client";
-import { isAxiosError } from "axios";
 import { revalidatePath } from "next/cache";
 import { getApiClient } from "../lib/api";
+import { errorMessage } from "../lib/errors";
 
 export interface CompanyFormState {
   error?: string;
   success?: boolean;
-}
-
-function errorMessage(err: unknown): string {
-  if (isAxiosError(err) && typeof err.response?.data?.message === "string") {
-    return err.response.data.message;
-  }
-  return "Ocurrió un error inesperado.";
 }
 
 export async function createCompanyAction(
@@ -69,10 +62,14 @@ export async function updateCompanyAction(
 
 export async function setCompanyStatus(id: number, nextStatus: "enable" | "disable") {
   const client = getApiClient();
-  if (nextStatus === "enable") {
-    await client.companies.enable(id);
-  } else {
-    await client.companies.disable(id);
+  try {
+    if (nextStatus === "enable") {
+      await client.companies.enable(id);
+    } else {
+      await client.companies.disable(id);
+    }
+  } catch (err) {
+    throw new Error(errorMessage(err));
   }
   revalidatePath("/configuracion/empresas");
 }

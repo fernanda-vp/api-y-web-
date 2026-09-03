@@ -29,6 +29,28 @@
   --color-warning: #d69a1e;
   --color-error: #c24a3e;
   --color-info: var(--color-primary);
+
+  /* Tokens de shadcn/ui — mapeados a la paleta de marca de arriba, no a los
+     valores genéricos que trae el generador. `accent`/`accent-foreground`
+     quedan sin definir a propósito: shadcn los usa para "superficie resaltada
+     al hover" (gris sutil), pero este proyecto ya usa `--color-accent` como
+     el verde de marca (botones de acción) — si un componente nuevo de
+     shadcn los necesita, hay que resolver ese choque de nombres primero,
+     no darles el verde de marca por accidente. */
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-neutral-100);
+  --secondary-foreground: var(--color-neutral-700);
+  --muted: var(--color-neutral-100);
+  --muted-foreground: var(--color-neutral-400);
+  --destructive: var(--color-error);
+  --destructive-foreground: #ffffff;
+  --border: var(--color-neutral-200);
+  --input: var(--color-neutral-200);
+  --ring: var(--color-primary);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --card: var(--background);
+  --card-foreground: var(--foreground);
 }
 
 @theme inline {
@@ -62,6 +84,21 @@
   --color-warning: var(--color-warning);
   --color-error: var(--color-error);
   --color-info: var(--color-info);
+
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 }
 
 body {
@@ -109,4 +146,12 @@ body {
     opacity: 0;
     transform: scale(0.96);
   }
+}
+
+/* Colores del calendario (react-day-picker) alineados a la paleta de marca. */
+.rdp-root {
+  --rdp-accent-color: var(--color-primary);
+  --rdp-accent-background-color: var(--color-primary-50);
+  --rdp-today-color: var(--color-accent-700);
+  --rdp-day_button-border-radius: 0.375rem;
 }

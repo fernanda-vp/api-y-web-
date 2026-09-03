@@ -46,4 +46,4 @@ Que cada Pull Request (y cada push a `main`) corra automáticamente lint + build
 
 - [x] `bitbucket-pipelines.yml` implementado según lo de arriba.
 - [x] Validado localmente, comando por comando, la secuencia exacta que correrá el pipeline (`pnpm install --frozen-lockfile`, `prisma generate`, typecheck de `api-client`, `lint`, `build`, `test`) — todo pasa limpio.
-- [ ] El usuario commitea/pushea `bitbucket-pipelines.yml`, habilita Pipelines en Bitbucket (Repository settings → Pipelines) y confirma que una corrida real pasa en verde.
+- [x] El usuario commiteó/pusheó `bitbucket-pipelines.yml`, habilitó Pipelines en Bitbucket y confirmó una corrida real en verde.

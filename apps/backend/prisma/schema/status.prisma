@@ -25,6 +25,7 @@ model Status {
   users       User[]
   employees   Employee[]
   positions   Position[]
+  roles       Role[]
 
   @@unique([groupId, code])
 }

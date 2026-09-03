@@ -3,6 +3,7 @@ enum ScopeType {
   COMPANY
   ZONE
   DEPARTMENT
+  JOB_TITLE
 }
 
 model RoleAssignment {

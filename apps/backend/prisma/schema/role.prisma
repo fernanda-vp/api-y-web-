@@ -1,6 +1,9 @@
 model Role {
   id        Int      @id @default(autoincrement())
   name      String   @unique
+  isSystem  Boolean  @default(false)
+  statusId  Int
+  status    Status   @relation(fields: [statusId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -15,6 +18,8 @@ model Permission {
   updatedAt DateTime @updatedAt
 
   rolePermissions RolePermission[]
+  dependencies    PermissionDependency[] @relation("PermissionDependents")
+  dependents      PermissionDependency[] @relation("PermissionRequiredBy")
 }
 
 model RolePermission {
@@ -25,4 +30,17 @@ model RolePermission {
   createdAt    DateTime   @default(now())
 
   @@id([roleId, permissionId])
+}
+
+/**
+ * `permission` requiere que `dependsOn` también esté otorgado en el mismo rol.
+ */
+model PermissionDependency {
+  permissionId Int
+  permission   Permission @relation("PermissionDependents", fields: [permissionId], references: [id])
+  dependsOnId  Int
+  dependsOn    Permission @relation("PermissionRequiredBy", fields: [dependsOnId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  @@id([permissionId, dependsOnId])
 }

@@ -8,8 +8,18 @@ import { CONFIG_SIDEBAR_NAV } from "../../../lib/nav";
 
 const STORAGE_KEY = "config-sidebar-collapsed";
 
-export function SidebarNav() {
+interface Props {
+  // Los íconos (componentes React) no se pueden pasar como prop desde un
+  // Server Component — el filtrado por permiso se hace aquí, con la
+  // constante importada localmente, recibiendo solo strings serializables.
+  permissions: string[];
+}
+
+export function SidebarNav({ permissions }: Props) {
   const pathname = usePathname();
+  const items = CONFIG_SIDEBAR_NAV.filter(
+    (item) => !item.permission || permissions.includes(item.permission),
+  );
   const [collapsed, setCollapsed] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
@@ -50,7 +60,7 @@ export function SidebarNav() {
       </div>
 
       <nav className="flex flex-col gap-0.5">
-        {CONFIG_SIDEBAR_NAV.map((item) => {
+        {items.map((item) => {
           const active = pathname.startsWith(item.href);
           const Icon = item.icon;
           return (

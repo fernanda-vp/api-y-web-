@@ -11,7 +11,9 @@ export const loginResponseSchema = z.object({
 });
 export type LoginResponse = z.infer<typeof loginResponseSchema>;
 
-export const employeeSchema = z.object({
+// Forma mínima del Employee anidado en /auth/me (sin `status`/`user` completos,
+// a diferencia del Employee "rico" de core/employees — ver schemas/employee.ts).
+export const meEmployeeSchema = z.object({
   id: z.number(),
   userId: z.number(),
   code: z.string(),
@@ -22,7 +24,7 @@ export const employeeSchema = z.object({
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
 });
-export type Employee = z.infer<typeof employeeSchema>;
+export type MeEmployee = z.infer<typeof meEmployeeSchema>;
 
 export const meResponseSchema = z.object({
   id: z.number(),
@@ -30,6 +32,7 @@ export const meResponseSchema = z.object({
   name: z.string(),
   lastName: z.string(),
   photoUrl: z.string().nullable(),
-  employee: employeeSchema.nullable(),
+  employee: meEmployeeSchema.nullable(),
+  permissions: z.array(z.string()),
 });
 export type MeResponse = z.infer<typeof meResponseSchema>;

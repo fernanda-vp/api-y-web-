@@ -18,8 +18,8 @@ export function CompanyRowMenu({ company, onEdit }: Props) {
     try {
       await setCompanyStatus(company.id, isActive ? "disable" : "enable");
       toast.success(isActive ? "Empresa deshabilitada" : "Empresa habilitada");
-    } catch {
-      toast.error("No se pudo actualizar el estatus.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "No se pudo actualizar el estatus.");
     }
   }
 

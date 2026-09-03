@@ -2,7 +2,8 @@
 
 import type { MeResponse } from "@intranet/api-client";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { LogOut } from "lucide-react";
+import { LogOut, UserRound } from "lucide-react";
+import Link from "next/link";
 import { logout } from "../../actions/auth";
 
 function initialsOf(me: MeResponse) {
@@ -30,6 +31,14 @@ export function UserMenu({ me }: { me: MeResponse }) {
           <p className="truncate px-3 py-2 text-xs text-neutral-700">
             {me.name} {me.lastName}
           </p>
+          <DropdownMenu.Item asChild>
+            <Link
+              href="/mi-perfil"
+              className="flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-neutral-900 outline-none hover:bg-neutral-100 data-[highlighted]:bg-neutral-100"
+            >
+              <UserRound size={14} /> Mi Perfil
+            </Link>
+          </DropdownMenu.Item>
           <DropdownMenu.Item asChild>
             <form action={logout}>
               <button
